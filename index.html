@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stripe Checkout Sample</title>
+    <meta name="description" content="A demo of Stripe Payment Intents" />
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css1/normalize.css" />
+    <link rel="stylesheet" href="css1/global.css" />
+    <!-- Load Stripe.js on your website. -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="./script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="togethere-background"></div>
+    <div class="sr-root">
+      <div class="sr-main">
+        <header class="sr-header">
+          <div class="sr-header__logo"></div>
+        </header>
+        <h1>Choose a collaboration plan</h1>
+
+        <div class="price-table-container">
+          <section>
+         
+              <img
+                src="/img/starter.png"
+                width="120"
+                height="120"
+                />
+              <div class="name">One Time</div>
+              <div class="price">payment</div>
+              
+              <!-- <div class="duration">per month</div> -->
+
+              <button
+              data-checkout-mode="payment"
+              data-price-id="price_1J7i9BE0XibgFHnrWutXumjE"
+            >
+             $20.00 <span class="duration">once</span>
+            </button>
+            <button
+              data-checkout-mode="payment"
+              data-price-id="price_1J7iDbE0XibgFHnrUIl0Prxu"
+            >
+             $50.00 <span class="duration">once</span>
+            </button>
+            <button
+            data-checkout-mode="payment"
+            data-price-id="price_1J7iDbE0XibgFHnriMsTU2Lr"
+          >
+           $100.00 <span class="duration">once</span>
+          </button>
+            <button
+            data-checkout-mode="payment"
+            data-price-id="price_1JCrWaE0XibgFHnrpeC7pME6"
+             >
+             $200.00 <span class="duration">once</span>
+            </button>
+            <button
+            data-checkout-mode="payment"
+            data-price-id="price_1J7iDbE0XibgFHnrhTiRWvBu"
+            >
+             $500.00  <span class="duration">once</span>
+            </button>
+                <!--
+        <button id="basic-plan-btn">Select</button>
+                -->
+             
+            
+          </section>
+          <section>
+            
+              
+              <img
+                src="/img/professional.png"
+                width="120"
+                height="120"
+                />
+              <div class="name">Recurring</div>
+              <div class="price">Subscription</div>
+             <br>
+
+               
+              <button
+                data-checkout-mode="subscription"
+                data-price-id="price_1JCatkE0XibgFHnr1ZF5AcfH"
+              >
+                 $20.00 <br>  <div class="duration">per month</div>
+              </button>
+              <br>
+
+                <button
+                data-checkout-mode="subscription"
+                data-price-id="price_1JCrU0E0XibgFHnrPG3jWTn4"
+                >
+                $50.00 <br>  <div class="duration">per month</div>
+                </button>
+            <br>
+              <button
+              data-checkout-mode="subscription"
+              data-price-id="price_1JCazNE0XibgFHnr70hpokk9"
+              >
+               $100.00 <br>  <div class="duration">per month</div>
+            </button>
+
+            <!-- <button id="pro-plan-btn">Select</button> -->
+           
+          </section>
+        </div>
+      </div>
+    </div>
+    <div id="error-message" class="error-message"></div>
+
+
+    <script>
+        // Replace with your own publishable key: https://dashboard.stripe.com/test/apikeys
+        var PUBLISHABLE_KEY = 'pk_test_51J7i4cE0XibgFHnrkdnbcmiEGZsPtfnfPLwdnV1eRY98g7FtVVKmmTHZHGhrpNu78X9Ycj5fQUGS5PqqYy5l0w3n00DqOJrJQC';
+        // Replace with the domain you want your users to be redirected back to after payment
+        var DOMAIN = location.href.replace(/[^/]*$/, '');
+  
+        if (PUBLISHABLE_KEY === 'pk_test_Tr8olTkdFnnJVywwhNPHwnHK00HkHV4tnP') {
+          console.log(
+            'Replace the hardcoded publishable key with your own publishable key: https://dashboard.stripe.com/test/apikeys'
+          );
+        }
+  
+        var stripe = Stripe(PUBLISHABLE_KEY);
+  
+        // Handle any errors from Checkout
+        var handleResult = function (result) {
+          if (result.error) {
+            var displayError = document.getElementById('error-message');
+            displayError.textContent = result.error.message;
+          }
+        };
+  
+        document.querySelectorAll('button').forEach(function (button) {
+          button.addEventListener('click', function (e) {
+            var mode = e.target.dataset.checkoutMode;
+            var priceId = e.target.dataset.priceId;
+            var items = [{ price: priceId, quantity: 1 }];
+  
+            // Make the call to Stripe.js to redirect to the checkout page
+            // with the sku or plan ID.
+            stripe
+              .redirectToCheckout({
+                mode: mode,
+                lineItems: items,
+                successUrl:
+                  DOMAIN + 'success.html?session_id={CHECKOUT_SESSION_ID}',
+                cancelUrl:
+                  DOMAIN + 'canceled.html?session_id={CHECKOUT_SESSION_ID}',
+              })
+              .then(handleResult);
+          });
+        });
+      </script>
+
+
+  </body>
+</html>
