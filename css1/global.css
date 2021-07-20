@@ -31,6 +31,15 @@
   --radius: 6px;
 }
 
+
+/* Table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+table, th, td {
+  border: 1px solid black;
+}
 /* Base */
 html {
   box-sizing: border-box;

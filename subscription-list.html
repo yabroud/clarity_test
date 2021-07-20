@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Stripe Checkout Sample</title>
+    <meta name="description" content="A demo of Stripe Payment Intents" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css1/normalize.css" />
+    <link rel="stylesheet" href="css1/global.css" />
+    <!-- Load Stripe.js on your website. -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+            $.get("https://frenchless.herokuapp.com/subscriptions", function (response) {
+
+
+               
+
+                
+                var subscriptionSection = "<table> <tr><th>Name</th> <th>amount</th> <th>currency</th> </tr>"
+
+                $.each(response.data, function (index, item) {
+
+
+
+                    subscriptionSection += `<tr><td> ${response.name[index]}</td> <td>${item.amount /100}</td> <td>${item.currency}</td> </tr>`;
+                
+                })
+                subscriptionSection += `</table>`
+
+                $("#subscription-list").html(subscriptionSection)
+
+            })
+
+
+
+
+        })
+
+    </script>
+    </head>
+
+<body>
+    <div class="togethere-background"></div>
+
+
+
+    <div class="sr-root">
+        <div class="sr-main">
+            <header class="sr-header">
+                <div class="sr-header__logo"></div>
+
+            </header>
+            <h1>Subscription List</h1>
+
+
+
+
+            <div class="price-table-container">
+                <section>
+
+                    <img src="img/starter.png" width="120" height="120" />
+                    <div id="subscription-list"></div>
+
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+    <div id="error-message" class="error-message"></div>
+
+
+
+
+</body>
+
+</html>
