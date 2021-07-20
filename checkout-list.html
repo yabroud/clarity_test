@@ -19,19 +19,19 @@
             $.get("https://frenchless.herokuapp.com/checkout", function (response) {
                 // console.log(response.data.data[0].charges.data[0].billing_details.email)
           
-                var checkoutSection = "<table> <tr><th>Name</th> <th>amount</th> <th>currency</th> </tr>"
+                var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
 
                 $.each(response.data, function (index, item) {
-
-                    console.log(item)
+                  
                      let email = 'no name'
 
                     if(item.customer_details != null ||item.customer_details != undefined ) {
                          email = item.customer_details.email
                     }
-                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td> </tr>`;
+                    
+                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${item.description}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
                 })
-                checkoutSection +=`</table>`
+                checkoutSection +=`</tbody> </table>`
 
                 $("#checkoutSection-list").html(checkoutSection)
 
@@ -59,20 +59,8 @@
             <h1>Ckeckout List</h1>
 
 
-            <div id="subscription-list"></div>
-
-
-            <div class="price-table-container">
-                <section>
-
-                    <img src="img/starter.png" width="120" height="120" />
-
                     <div id="checkoutSection-list"></div>
 
-
-                </section>
-
-            </div>
         </div>
     </div>
 

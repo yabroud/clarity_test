@@ -7,8 +7,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css1/normalize.css" />
+    <link rel="stylesheet" href="css1/global.css" />
     <script src="https://js.stripe.com/v3/"></script>
     <script>
       $(document).ready(function () {
@@ -20,7 +20,7 @@ $.get("https://frenchless.herokuapp.com/subscriptions", function (response) {
    
 
     
-    var subscriptionSection = "<table> <tr><th>Name</th> <th>amount</th> <th>currency</th> </tr>"
+    var subscriptionSection = "<table class ='styled-table'><thead> <tr> <th>Name</th> <th>Amount</th> <th>Currency</th> </tr> <thead><tbody>"
 
     $.each(response.data, function (index, item) {
 
@@ -29,7 +29,7 @@ $.get("https://frenchless.herokuapp.com/subscriptions", function (response) {
         subscriptionSection += `<tr><td> ${response.name[index]}</td> <td>${item.amount /100}</td> <td>${item.currency}</td> </tr>`;
     
     })
-    subscriptionSection += `</table>`
+    subscriptionSection += `</tbody> </table>`
 
     $("#subscription-list").html(subscriptionSection)
 
@@ -38,19 +38,19 @@ $.get("https://frenchless.herokuapp.com/subscriptions", function (response) {
 $.get("https://frenchless.herokuapp.com/checkout", function (response) {
                 // console.log(response.data.data[0].charges.data[0].billing_details.email)
           
-                var checkoutSection = "<table> <tr><th>Name</th> <th>amount</th> <th>currency</th> </tr>"
+                var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
 
                 $.each(response.data, function (index, item) {
-
-                    console.log(item)
+                  
                      let email = 'no name'
 
                     if(item.customer_details != null ||item.customer_details != undefined ) {
                          email = item.customer_details.email
                     }
-                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td> </tr>`;
+                    
+                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${item.description}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
                 })
-                checkoutSection +=`</table>`
+                checkoutSection +=`</tbody> </table>`
 
                 $("#checkoutSection-list").html(checkoutSection)
 
@@ -71,17 +71,18 @@ $.get("https://frenchless.herokuapp.com/checkout", function (response) {
           <h1>Your test payment succeeded</h1>
           <h4>Checkout Session ID: <span id="session"></span></h4>
         </div>
+      
+      <div class="sr-content">
         <div class="margin:0 auto">
 
-          <h1>Subscription List</h1>
+          <!-- <h1>Subscription List</h1>
   
-          <div id="subscription-list"></div>
-          <h1>Ckeckout List</h1>
+          <div id="subscription-list"></div> -->
+          <h1>Payment List</h1>
     
           <div id="checkoutSection-list"></div>
   
         </div>
-      <div class="sr-content">
         <div class="pasha-image-stack">
           <img
             src="https://picsum.photos/280/320?random=1"

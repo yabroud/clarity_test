@@ -21,19 +21,19 @@
             $.get("https://frenchless.herokuapp.com/subscriptions", function (response) {
 
 
-               
 
-                
-                var subscriptionSection = "<table> <tr><th>Name</th> <th>amount</th> <th>currency</th> </tr>"
+
+
+                var subscriptionSection = "<table class ='styled-table'><thead> <tr> <th>Name</th> <th>Amount</th> <th>Currency</th> </tr> <thead><tbody>"
 
                 $.each(response.data, function (index, item) {
 
 
 
-                    subscriptionSection += `<tr><td> ${response.name[index]}</td> <td>${item.amount /100}</td> <td>${item.currency}</td> </tr>`;
-                
+                    subscriptionSection += `<tr><td> ${response.name[index]}</td> <td>${item.amount / 100}</td> <td>${item.currency}</td> </tr>`;
+
                 })
-                subscriptionSection += `</table>`
+                subscriptionSection += `</tbody> </table>`
 
                 $("#subscription-list").html(subscriptionSection)
 
@@ -45,7 +45,7 @@
         })
 
     </script>
-    </head>
+</head>
 
 <body>
     <div class="togethere-background"></div>
@@ -63,17 +63,10 @@
 
 
 
-            <div class="price-table-container">
-                <section>
+       
 
-                    <img src="img/starter.png" width="120" height="120" />
                     <div id="subscription-list"></div>
 
-
-
-                </section>
-
-            </div>
         </div>
     </div>
     <div id="error-message" class="error-message"></div>
