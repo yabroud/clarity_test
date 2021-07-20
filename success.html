@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <title>Stripe Checkout Sample</title>
     <meta name="description" content="A demo of Stripe client-only Checkout" />
+
+    <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/normalize.css" />
@@ -12,13 +14,8 @@
 
     <script>
             $(document).ready(function () {
-
-
 $.get("https://frenchless.herokuapp.com/subscriptions", function (response) {
     
-
-    console.log(response)
-    console.log('response')
     var subscriptionSection = "<table> <tr><th>Name</th> <th>amount</th> <th>currency</th> </tr>"
 
     $.each(response.data, function (index, item) {
