@@ -23,13 +23,14 @@
 
                 $.each(response.data, function (index, item) {
                   
-                     let email = 'no name'
-
-                    if(item.customer_details != null ||item.customer_details != undefined ) {
-                         email = item.customer_details.email
+                    let payment=''
+                    if(item.description === 'Subscription creation') {
+                        payment ='Month'
+                    }else{
+                        payment = 'Once'
                     }
                     
-                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${item.description}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
+                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${payment}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
                 })
                 checkoutSection +=`</tbody> </table>`
 
