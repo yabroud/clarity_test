@@ -17,7 +17,6 @@
 
 
             $.get("https://frenchless.herokuapp.com/checkout", function (response) {
-                // console.log(response.data.data[0].charges.data[0].billing_details.email)
           
                 var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
 
@@ -30,7 +29,7 @@
                         payment = 'Once'
                     }
                     
-                    checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${payment}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
+                    checkoutSection += `<tr><td> ${item.billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${payment}</td><td>${item.billing_details.address.country}</td> </tr>`;
                 })
                 checkoutSection +=`</tbody> </table>`
 
@@ -57,10 +56,13 @@
                 <div class="sr-header__logo"></div>
 
             </header>
-            <h1>Ckeckout List</h1>
-
-
-                    <div id="checkoutSection-list"></div>
+            <h1>Payments List</h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div id="checkoutSection-list"></div>
 
         </div>
     </div>

@@ -13,68 +13,42 @@
   <script src="https://js.stripe.com/v3/"></script>
   <script>
     $(document).ready(function () {
-
-
       $.get("https://frenchless.herokuapp.com/checkout", function (response) {
         // console.log(response.data.data[0].charges.data[0].billing_details.email)
-
         var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
-
         $.each(response.data, function (index, item) {
-
           let payment = ''
           if (item.description === 'Subscription creation') {
             payment = 'Per Month'
           } else {
             payment = 'Once'
           }
-
           checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount / 100}</td> <td>${item.currency}</td><td>${payment}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
         })
         checkoutSection += `</tbody> </table>`
-
         $("#checkoutSection-list").html(checkoutSection)
-
       })
-
-
     })
   </script>
 </head>
 
 <body>
+  <div class="togethere-background"></div>
   <div class="sr-root">
     <div class="sr-main">
       <header class="sr-header">
-        <a href="./" class="sr-header__logo"></a>
+        <a href="./">
+          <div class="sr-header__logo"></div>
+        </a> 
       </header>
       <div class="sr-payment-summary completed-view">
         <h1>Your test payment succeeded</h1>
         <h4>Checkout Session ID: <span id="session"></span></h4>
       </div>
 
-      <div class="sr-content">
-        <div class="margin:0 auto">
-
-          <!-- <h1>Subscription List</h1>
-  
-          <div id="subscription-list"></div> -->
-          <h1>Payment List</h1>
+      <h1 style="text-align: center;">Payments List</h1>
 
           <div id="checkoutSection-list"></div>
-
-        </div>
-        <div class="pasha-image-stack">
-          <img src="https://picsum.photos/280/320?random=1" width="140" height="160" />
-          <img src="https://picsum.photos/280/320?random=2" width="140" height="160" />
-          <img src="https://picsum.photos/280/320?random=3" width="140" height="160" />
-          <img src="https://picsum.photos/280/320?random=4" width="140" height="160" />
-        </div>
-      </div>
-
-
-
-
     </div>
     <script>
       var urlParams = new URLSearchParams(window.location.search);
