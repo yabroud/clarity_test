@@ -14,19 +14,24 @@
   <script>
     $(document).ready(function () {
       $.get("https://frenchless.herokuapp.com/checkout", function (response) {
-        // console.log(response.data.data[0].charges.data[0].billing_details.email)
-        var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
-        $.each(response.data, function (index, item) {
-          let payment = ''
-          if (item.description === 'Subscription creation') {
-            payment = 'Per Month'
-          } else {
-            payment = 'Once'
-          }
-          checkoutSection += `<tr><td> ${item.charges.data[0].billing_details.email}</td> <td>${item.amount / 100}</td> <td>${item.currency}</td><td>${payment}</td><td>${item.charges.data[0].billing_details.address.country}</td> </tr>`;
-        })
-        checkoutSection += `</tbody> </table>`
-        $("#checkoutSection-list").html(checkoutSection)
+          
+          var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
+
+          $.each(response.data, function (index, item) {
+            
+              let payment=''
+              if(item.description === 'Subscription creation') {
+                  payment ='Month'
+              }else{
+                  payment = 'Once'
+              }
+              
+              checkoutSection += `<tr><td> ${item.billing_details.email}</td> <td>${item.amount /100}</td> <td>${item.currency}</td><td>${payment}</td><td>${item.billing_details.address.country}</td> </tr>`;
+          })
+          checkoutSection +=`</tbody> </table>`
+
+          $("#checkoutSection-list").html(checkoutSection)
+
       })
     })
   </script>
