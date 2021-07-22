@@ -23,7 +23,7 @@ $(document).ready(function () {
 
                 let payment = ''
                 if (item.description === 'Subscription creation') {
-                    payment = 'Month'
+                    payment = 'Per Month'
                 } else {
                     payment = 'Once'
                 }
