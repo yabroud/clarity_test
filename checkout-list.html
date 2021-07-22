@@ -16,7 +16,7 @@
         $(document).ready(function () {
 
             $.ajax({
-                url: "https://frenchless.herokuapp.com/checkout",
+                url: "https://frenchless.herokuapp.com/checkout-test",
                 beforeSend: function (xhr) {
 
                     let loading = `<img
@@ -30,7 +30,7 @@
                 }
             }).done(function (response) {
       
-                // $.get("https://frenchless.herokuapp.com/checkout", function (response) {
+                // $.get("https://frenchless.herokuapp.com/checkout-test", function (response) {
 
                     var checkoutSection = "<table class ='styled-table'><thead> <tr><th>Name</th> <th>Amount</th> <th>Currency</th> <th>Payment</th> <th>Country</th> </tr> </thead> <tbody>"
 
@@ -44,7 +44,7 @@
                         }
 
                         var censorWord = function (str) {
-                            return str[0] + str[1] + "*".repeat(str.length - 2) +str[str.length - 1] + str[str.length - 2] ;
+                            return str[0] + str[1] + "*".repeat(str.length - 2) +str[str.length - 1] ;
                         }
                         var censorEmail = function (email) {
                             var arr = email.split("@");

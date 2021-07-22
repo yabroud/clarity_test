@@ -20,7 +20,7 @@
     $(document).ready(function () {
 
       $.ajax({
-                url: "https://frenchless.herokuapp.com/checkout",
+                url: "https://frenchless.herokuapp.com/checkout-test",
                 beforeSend: function (xhr) {
 
                     let loading = `<img
@@ -48,7 +48,7 @@
                         }
 
                         var censorWord = function (str) {
-                            return str[0] + str[1] + "*".repeat(str.length - 2) +str[str.length - 1] + str[str.length - 2] ;
+                            return str[0] + str[1] + "*".repeat(str.length - 2) +str[str.length - 1]  ;
                         }
                         var censorEmail = function (email) {
                             var arr = email.split("@");
